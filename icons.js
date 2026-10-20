@@ -37,8 +37,8 @@ const ICONS = {
   // 돈까스·카츠
   katsu: `<ellipse cx="48" cy="78" rx="42" ry="11" fill="#fff"/><path d="M56 74c-4-14 4-26 16-24 10 2 14 12 12 24z" fill="#b9d98a"/><g><rect x="9" y="34" width="24" height="40" rx="9" fill="#d98a2b" transform="rotate(-8 21 54)"/><rect x="14" y="40" width="14" height="28" rx="5" fill="#ffe0cf" transform="rotate(-8 21 54)"/><rect x="29" y="30" width="24" height="42" rx="9" fill="#e59a3d"/><rect x="34" y="36" width="14" height="30" rx="5" fill="#ffe0cf"/><rect x="48" y="34" width="24" height="40" rx="9" fill="#d98a2b" transform="rotate(8 60 54)"/><rect x="53" y="40" width="14" height="28" rx="5" fill="#ffe0cf" transform="rotate(8 60 54)"/></g>`,
 
-  // 일식(일반): 주먹밥
-  onigiri: `<path d="M48 18Q54 18 58 26L86 74Q92 86 80 86H16Q4 86 10 74L38 26Q42 18 48 18Z" fill="#fff"/><path d="M17.5 62H78.5L86 74Q92 86 80 86H16Q4 86 10 74Z" fill="#2f3a33"/><circle cx="48" cy="44" r="5" fill="#d9482b"/><path d="M8 90h80" stroke="#7a3f0a" stroke-width="3" stroke-linecap="round"/>`,
+  // 일식(일반)·소바: 채반 메밀국수
+  soba: `<rect x="8" y="54" width="80" height="30" rx="6" fill="#c98a45"/><g stroke="#a8702f" stroke-width="2.5" stroke-linecap="round"><path d="M14 62H82"/><path d="M14 70H82"/><path d="M14 78H82"/></g><path d="M12 58c0-14 12-22 28-22s28 8 28 22z" fill="#f1e8d4"/><g fill="none" stroke="#b9a37e" stroke-width="2.5" stroke-linecap="round"><path d="M18 52c4-4 8 4 12 0s8 4 12 0 8 4 12 0 4 2 6 0"/><path d="M20 44c5-4 9 4 14 0s9 4 14 0"/></g><path d="M32 40q8-3 16 0" fill="none" stroke="#2f3a33" stroke-width="3" stroke-linecap="round"/><path d="M62 62h26l-2.6 18c-.4 3-2.8 5-5.6 5h-9.2c-2.8 0-5.2-2-5.6-5z" fill="#fff"/><ellipse cx="75" cy="62" rx="13" ry="3.6" fill="#4a2a14"/><g fill="#6cb35d"><circle cx="71" cy="62" r="1.4"/><circle cx="76" cy="61.4" r="1.4"/><circle cx="79.5" cy="62.4" r="1.2"/></g>`,
 
   // 멕시칸
   taco: `<path d="M12 58Q17 40 26 48T40 41T54 37T68 42T83 47L84 58Z" fill="#6cb35d"/><circle cx="32" cy="50" r="4" fill="#d9482b"/><circle cx="52" cy="45" r="4" fill="#d9482b"/><circle cx="70" cy="50" r="4" fill="#d9482b"/><path d="M8 58h80c0 22-18 32-40 32S8 80 8 58z" fill="#f2c14e"/><path d="M8 58h80" stroke="#e0a82e" stroke-width="4" stroke-linecap="round"/><path d="M20 70c6 8 14 12 28 12" fill="none" stroke="#fff3c4" stroke-width="3" stroke-linecap="round"/>`,
@@ -49,7 +49,7 @@ const ICONS = {
 
 // 위에 있을수록 우선. 카테고리가 여러 개면 가장 위 규칙에 걸린 아이콘을 씁니다.
 const ICON_RULES = [
-  ["noodle", ["면", "국수", "라멘", "라면", "우동", "냉면", "파스타", "짬뽕", "짜장", "소바", "아시안", "베트남", "태국", "팟타이"]],
+  ["noodle", ["면", "국수", "라멘", "라면", "우동", "냉면", "파스타", "짬뽕", "짜장", "아시안", "베트남", "태국", "팟타이"]],
   ["dumpling", ["만두", "딤섬", "중식", "중국", "마라", "탕수육"]],
   ["soup", ["국밥", "찌개", "탕", "전골", "해장", "국물", "순대국", "순댓국"]],
   ["sushi", ["초밥", "스시", "회", "오마카세", "사시미"]],
@@ -62,7 +62,7 @@ const ICON_RULES = [
   ["coffee", ["카페", "커피", "디저트", "빵", "베이커리", "브런치"]],
   ["salad", ["샐러드", "비건", "샌드위치"]],
   ["pizza", ["양식"]],
-  ["onigiri", ["일식"]],
+  ["soba", ["일식", "소바"]],
 ];
 
 function iconFor(categories) {
