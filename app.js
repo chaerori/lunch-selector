@@ -1,4 +1,5 @@
 const STORAGE_KEY = "lunch-selector:restaurants";
+const PENCIL_ICON = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m13.5 6.5 4 4"/></svg>';
 
 const $ = (id) => document.getElementById(id);
 const hero = document.querySelector(".hero");
@@ -73,11 +74,8 @@ function renderList() {
   $("list").replaceChildren(...restaurants.map((r, i) => {
     const li = document.createElement("li");
 
-    const main = document.createElement("button");
-    main.type = "button";
+    const main = document.createElement("div");
     main.className = "row-main";
-    main.setAttribute("aria-label", `${r.name} 수정`);
-    main.onclick = () => openSheet(i);
     const name = document.createElement("span");
     name.className = "row-name";
     name.textContent = r.name;
@@ -97,6 +95,14 @@ function renderList() {
       map.setAttribute("aria-label", `${r.name} 지도 열기`);
       li.append(map);
     }
+
+    const edit = document.createElement("button");
+    edit.type = "button";
+    edit.className = "icon-btn";
+    edit.innerHTML = PENCIL_ICON;
+    edit.setAttribute("aria-label", `${r.name} 수정`);
+    edit.onclick = () => openSheet(i);
+    li.append(edit);
 
     const del = document.createElement("button");
     del.type = "button";
