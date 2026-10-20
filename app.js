@@ -15,7 +15,9 @@ const excluded = new Set();
 function load() {
   try {
     const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
-    if (Array.isArray(saved)) return saved;
+    if (Array.isArray(saved)) {
+      return saved.map((r) => ({ ...r, categories: r.categories ?? [r.category] }));
+    }
   } catch {}
   return [];
 }
@@ -33,8 +35,9 @@ function isHttpUrl(value) {
   }
 }
 
-const categories = () => [...new Set(restaurants.map((r) => r.category))].sort();
-const candidates = () => restaurants.filter((r) => !excluded.has(r.category));
+const parseCategories = (text) => [...new Set(text.split(/[,，]/).map((c) => c.trim()).filter(Boolean))];
+const categories = () => [...new Set(restaurants.flatMap((r) => r.categories))].sort();
+const candidates = () => restaurants.filter((r) => !r.categories.some((c) => excluded.has(c)));
 
 function renderFilters() {
   const cats = categories();
@@ -76,7 +79,7 @@ function renderList() {
     name.textContent = r.name;
     const tag = document.createElement("span");
     tag.className = "row-tag";
-    tag.textContent = r.category;
+    tag.textContent = r.categories.join(", ");
     main.append(name, tag);
     li.append(main);
 
@@ -120,7 +123,7 @@ function show(r) {
   picked = true;
   pickBtn.textContent = "다시 뽑기";
   resultEl.textContent = r.name;
-  metaEl.textContent = r.category;
+  metaEl.textContent = r.categories.join(", ");
   resultLink.hidden = !r.url;
   if (r.url) resultLink.href = r.url;
   hero.classList.remove("landed");
@@ -138,7 +141,7 @@ pickBtn.onclick = () => {
   const timer = setInterval(() => {
     const r = pool[Math.floor(Math.random() * pool.length)];
     resultEl.textContent = r.name;
-    metaEl.textContent = r.category;
+    metaEl.textContent = r.categories.join(", ");
     if (++ticks >= 12) {
       clearInterval(timer);
       hero.classList.remove("rolling");
@@ -155,26 +158,31 @@ sheet.addEventListener("click", (e) => { if (e.target === sheet) sheet.close(); 
 $("add-form").onsubmit = (e) => {
   e.preventDefault();
   const name = $("name").value.trim();
-  const category = $("category").value.trim();
+  const categories = parseCategories($("category").value);
   const url = $("url").value.trim();
+  if (!categories.length) {
+    $("category").setCustomValidity("카테고리를 하나 이상 입력해 주세요.");
+    $("category").reportValidity();
+    return;
+  }
   if (url && !isHttpUrl(url)) {
     $("url").setCustomValidity("http:// 또는 https://로 시작하는 지도 링크를 넣어 주세요.");
     $("url").reportValidity();
     return;
   }
-  if (restaurants.some((r) => r.name === name && r.category === category)) {
+  if (restaurants.some((r) => r.name === name && r.categories.join() === categories.join())) {
     $("name").setCustomValidity("이미 있는 식당이에요.");
     $("name").reportValidity();
     return;
   }
-  restaurants.push({ name, category, url });
+  restaurants.push({ name, categories, url });
   save();
   e.target.reset();
   sheet.close();
   render();
 };
 
-for (const id of ["name", "url"]) {
+for (const id of ["name", "category", "url"]) {
   $(id).oninput = (e) => e.target.setCustomValidity("");
 }
 
