@@ -5,6 +5,7 @@ const { url: API_URL, key: API_KEY } = window.SUPABASE;
 
 const $ = (id) => document.getElementById(id);
 const hero = document.querySelector(".hero");
+const art = document.querySelector(".hero-art");
 const resultEl = $("result");
 const metaEl = $("result-meta");
 const resultLink = $("result-link");
@@ -170,6 +171,7 @@ function render() {
 
 function show(r) {
   picked = true;
+  art.innerHTML = iconFor(r.categories);
   pickBtn.textContent = "다시 뽑기";
   resultEl.textContent = r.name;
   metaEl.textContent = r.categories.join(", ");
@@ -191,6 +193,7 @@ pickBtn.onclick = () => {
     const r = pool[Math.floor(Math.random() * pool.length)];
     resultEl.textContent = r.name;
     metaEl.textContent = r.categories.join(", ");
+    art.innerHTML = iconFor(r.categories);
     if (++ticks >= 12) {
       clearInterval(timer);
       hero.classList.remove("rolling");
@@ -274,5 +277,6 @@ document.addEventListener("visibilitychange", () => {
   if (document.visibilityState === "visible") refresh();
 });
 
+art.innerHTML = ICONS.rice;
 render();
 refresh();
