@@ -38,8 +38,8 @@
 * { box-sizing: border-box; }
 html {
   -webkit-text-size-adjust: 100%;
-  /* 375px 폭에서 16px, 화면 폭에 비례해 커지고 작아짐(상한 26px) */
-  font-size: clamp(13px, calc(100vw * 16 / 375), 26px);
+  /* 375px 폭에서 16px, 화면 폭에 비례. 단 폭이 440px이 되는 18.77px에서 멈춤 */
+  font-size: clamp(13px, calc(100vw * 16 / 375), 18.77px);
 }
 body {
   margin: 0;
