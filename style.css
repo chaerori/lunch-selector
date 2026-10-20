@@ -133,7 +133,8 @@ button { cursor: pointer; border: 0; }
 .hint { margin: 0.625rem 0 0; color: var(--muted); font-size: .85rem; }
 
 /* 목록 */
-.add-btn { display: grid; place-items: center; width: 1.625rem; height: 1.625rem; padding: 0; border-radius: 50%; background: var(--chip); color: var(--chip-ink); font-size: 1.125rem; font-weight: 600; line-height: 1; }
+.add-btn { display: grid; place-items: center; width: 1.625rem; height: 1.625rem; padding: 0; border-radius: 50%; background: var(--tint); color: var(--tint-ink); }
+.add-btn svg { width: 0.875rem; height: 0.875rem; }
 .list { list-style: none; margin: 0; padding: 0.125rem 1rem; background: var(--surface); border-radius: 1.25rem; box-shadow: var(--shadow); }
 .list:empty { display: none; }
 .list li { display: flex; align-items: center; gap: 0.5rem; padding: 0.625rem 0; }
