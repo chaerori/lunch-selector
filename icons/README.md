@@ -1,26 +1,26 @@
 # 아이콘 출처
 
-이 폴더의 SVG 아이콘은 [OpenMoji](https://openmoji.org) 프로젝트의 디자인입니다.
+이 폴더의 SVG 아이콘은 Microsoft의 [Fluent Emoji](https://github.com/microsoft/fluentui-emoji) 중 **Flat** 스타일입니다.
 
-- 저작자: OpenMoji contributors (https://openmoji.org/)
-- 라이선스: [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/)
-- 원본: npm 패키지 `openmoji@15.1.0`의 `color/svg` (파일 이름만 용도에 맞게 바꿨습니다)
+- 저작자: Microsoft Corporation
+- 라이선스: MIT (전문은 [LICENSE](LICENSE) 참고)
+- 받은 곳: [Iconify](https://iconify.design)의 `fluent-emoji-flat` 세트 (파일 이름만 용도에 맞게 바꿨습니다)
 
-| 파일 | 원본 코드포인트 |
+| 파일 | Fluent Emoji 이름 |
 |---|---|
-| rice.svg | 1F35A |
-| noodle.svg | 1F35C |
-| soup.svg | 1F372 |
-| sushi.svg | 1F363 |
-| dumpling.svg | 1F95F |
-| pizza.svg | 1F355 |
-| burger.svg | 1F354 |
-| chicken.svg | 1F357 |
-| meat.svg | 1F969 |
-| coffee.svg | 2615 |
-| salad.svg | 1F957 |
-| taco.svg | 1F32E |
-| katsu.svg | 1F35B |
-| pasta.svg | 1F35D |
+| rice.svg | cooked-rice |
+| noodle.svg | steaming-bowl |
+| soup.svg | pot-of-food |
+| sushi.svg | sushi |
+| dumpling.svg | dumpling |
+| pizza.svg | pizza |
+| burger.svg | hamburger |
+| chicken.svg | poultry-leg |
+| meat.svg | cut-of-meat |
+| coffee.svg | hot-beverage |
+| salad.svg | green-salad |
+| taco.svg | taco |
+| katsu.svg | curry-rice |
+| pasta.svg | spaghetti |
 
-앱 아이콘(`favicon.svg`, `favicon-32.png`, `apple-touch-icon.png`)에는 OpenMoji의 `1F37D`(접시와 포크·나이프)를 사용했습니다.
+앱 아이콘(`favicon.svg`, `favicon-32.png`, `apple-touch-icon.png`)에는 같은 세트의 `fork-and-knife-with-plate`를 사용했습니다.

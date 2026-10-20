@@ -97,10 +97,10 @@ button { cursor: pointer; border: 0; }
 .hero-meta { margin-top: 0.25rem; padding-right: 5rem; color: var(--hero-muted); font-size: .85rem; font-weight: 500; }
 .hero-art {
   position: absolute;
-  right: 0.5rem;
-  bottom: 0.375rem;
-  width: 5.25rem;
-  height: 5.25rem;
+  right: 0.875rem;
+  bottom: 0.625rem;
+  width: 4.25rem;
+  height: 4.25rem;
   object-fit: contain;
   filter: drop-shadow(0 0.375rem 0.5rem rgba(120, 70, 0, .22));
   pointer-events: none;

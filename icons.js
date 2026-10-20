@@ -1,4 +1,4 @@
-// 결과 카드에 쓰는 음식 아이콘 (icons/*.svg, OpenMoji · CC BY-SA 4.0)
+// 결과 카드에 쓰는 음식 아이콘 (icons/*.svg, Fluent Emoji Flat · MIT, 자세한 내용은 icons/README.md)
 const ICON_NAMES = ["rice", "noodle", "soup", "sushi", "dumpling", "pizza", "burger", "chicken", "meat", "coffee", "salad", "taco", "katsu", "pasta"];
 
 // 위에 있을수록 우선. 카테고리가 여러 개면 가장 위 규칙에 걸린 아이콘을 씁니다.
