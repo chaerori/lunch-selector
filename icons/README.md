@@ -23,4 +23,4 @@
 | katsu.svg | curry-rice |
 | pasta.svg | spaghetti |
 
-앱 아이콘(`favicon.svg`, `favicon-32.png`, `apple-touch-icon.png`)에는 같은 세트의 `pot-of-food`를 사용했습니다.
+앱 아이콘(`favicon.svg`, `favicon-32.png`, `apple-touch-icon.png`)에는 같은 세트의 `spoon`과 `chopsticks`를 나란히 세워 사용했습니다. 호박색 배경 위에서 잘 보이도록 숟가락의 회색만 크림색으로 바꾸고 두 그림을 회전·확대했습니다.
