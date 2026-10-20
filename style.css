@@ -15,6 +15,8 @@
   --tint-ink: #b85c00;
   --shadow: 0 6px 24px rgba(40, 55, 90, .07);
   --danger: #e5484d;
+  --input-ink: #000;
+  --placeholder: #b3b9c4;
 }
 @media (prefers-color-scheme: dark) {
   :root {
@@ -28,6 +30,8 @@
     --tint: #3a2a17;
     --tint-ink: #ffb766;
     --shadow: none;
+    --input-ink: #fff;
+    --placeholder: #6b7280;
   }
 }
 
@@ -196,9 +200,11 @@ input {
   border: 1.5px solid transparent;
   border-radius: 16px;
   background: var(--bg);
+  color: var(--input-ink);
   font-size: 1rem;
   font-weight: 500;
 }
+input::placeholder { color: var(--placeholder); opacity: 1; }
 input:focus { outline: none; border-color: var(--accent); }
 input:invalid:not(:placeholder-shown):not(:focus) { border-color: var(--danger); }
 .primary {
