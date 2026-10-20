@@ -4,9 +4,9 @@
   --ink: #151a21;
   --muted: #6b7684;
   --line: #e3e7ec;
-  --hero: #151a21;
-  --hero-ink: #fff;
-  --hero-muted: #9aa5b1;
+  --hero: #ffd84d;
+  --hero-ink: #151a21;
+  --hero-muted: #6b5a12;
   --accent: #00c896;
   --on-accent: #06251c;
   --danger: #e5484d;
@@ -18,7 +18,6 @@
     --ink: #eef1f4;
     --muted: #8b95a1;
     --line: #262c34;
-    --hero: #1f262e;
   }
 }
 
@@ -70,8 +69,8 @@ button { cursor: pointer; border: 0; }
   margin-top: 20px;
   padding: 9px 16px;
   border-radius: 999px;
-  background: var(--accent);
-  color: var(--on-accent);
+  background: var(--hero-ink);
+  color: var(--hero);
   font-size: .9rem;
   font-weight: 700;
   text-decoration: none;
