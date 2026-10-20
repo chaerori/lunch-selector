@@ -187,8 +187,8 @@ dialog[open] { animation: sheet .25s ease-out; }
 dialog::backdrop { background: rgba(10, 14, 18, .45); }
 @keyframes sheet { from { transform: translateY(2.5rem); opacity: 0; } to { transform: none; opacity: 1; } }
 .sheet-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem; }
-#add-form label { display: block; margin-top: 1rem; font-size: .85rem; font-weight: 600; color: var(--muted); }
-.opt { font-weight: 400; }
+#add-form label { display: block; margin-top: 1rem; font-size: .85rem; font-weight: 600; color: var(--input-ink); }
+.opt { font-size: .7rem; font-weight: 400; color: var(--muted); }
 input {
   display: block;
   width: 100%;

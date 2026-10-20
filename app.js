@@ -39,7 +39,7 @@ function setStatus(text = "") {
 
 async function refresh() {
   try {
-    restaurants = await api("?select=*&order=created_at.asc");
+    restaurants = await api("?select=*&order=created_at.desc");
     state = "ready";
     setStatus();
   } catch {
@@ -256,7 +256,7 @@ $("add-form").onsubmit = async (e) => {
   try {
     if (id === null) {
       const [row] = await api("", { method: "POST", body });
-      restaurants.push(row);
+      restaurants.unshift(row);
     } else {
       const [row] = await api(`?id=eq.${id}`, { method: "PATCH", body });
       if (!row) throw new Error("missing");

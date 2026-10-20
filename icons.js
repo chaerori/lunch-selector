@@ -34,6 +34,9 @@ const ICONS = {
   // 카페·디저트
   coffee: `<g fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".9"><path d="M36 26c-5-5 5-8 0-14"/><path d="M50 24c-5-5 5-8 0-14"/></g><path d="M68 46h6c8 0 12 5 12 11s-4 11-12 11h-8" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/><path d="M18 38h50v24c0 14-10 24-25 24S18 76 18 62z" fill="#fff"/><ellipse cx="43" cy="38" rx="25" ry="6" fill="#7a3f0a"/><ellipse cx="43" cy="90" rx="34" ry="4" fill="#c8631a"/>`,
 
+  // 돈까스·카츠
+  katsu: `<ellipse cx="48" cy="78" rx="42" ry="11" fill="#fff"/><path d="M56 74c-4-14 4-26 16-24 10 2 14 12 12 24z" fill="#b9d98a"/><g><rect x="9" y="34" width="24" height="40" rx="9" fill="#d98a2b" transform="rotate(-8 21 54)"/><rect x="14" y="40" width="14" height="28" rx="5" fill="#ffe0cf" transform="rotate(-8 21 54)"/><rect x="29" y="30" width="24" height="42" rx="9" fill="#e59a3d"/><rect x="34" y="36" width="14" height="30" rx="5" fill="#ffe0cf"/><rect x="48" y="34" width="24" height="40" rx="9" fill="#d98a2b" transform="rotate(8 60 54)"/><rect x="53" y="40" width="14" height="28" rx="5" fill="#ffe0cf" transform="rotate(8 60 54)"/></g>`,
+
   // 일식(일반): 주먹밥
   onigiri: `<path d="M48 18Q54 18 58 26L86 74Q92 86 80 86H16Q4 86 10 74L38 26Q42 18 48 18Z" fill="#fff"/><path d="M17.5 62H78.5L86 74Q92 86 80 86H16Q4 86 10 74Z" fill="#2f3a33"/><circle cx="48" cy="44" r="5" fill="#d9482b"/><path d="M8 90h80" stroke="#7a3f0a" stroke-width="3" stroke-linecap="round"/>`,
 
@@ -53,6 +56,7 @@ const ICON_RULES = [
   ["pizza", ["피자", "이탈리"]],
   ["burger", ["버거", "패스트푸드"]],
   ["taco", ["멕시칸", "멕시코", "타코", "부리또"]],
+  ["katsu", ["카츠", "돈까스", "돈가스", "커틀릿", "튀김"]],
   ["chicken", ["치킨", "닭"]],
   ["meat", ["고기", "구이", "삼겹", "갈비", "바비큐", "스테이크", "곱창", "족발", "보쌈"]],
   ["coffee", ["카페", "커피", "디저트", "빵", "베이커리", "브런치"]],
