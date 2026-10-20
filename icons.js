@@ -5,7 +5,7 @@ const CHOPSTICKS = `<g stroke="#7a3f0a" stroke-width="3.5" stroke-linecap="round
 
 const ICONS = {
   // 한식·기본: 밥
-  rice: `${STEAM}<path d="M18 52c0-15 12-24 30-24s30 9 30 24z" fill="#fff"/>${CHOPSTICKS}${BOWL}`,
+  rice: `${STEAM}<path d="M18 52c0-15 12-24 30-24s30 9 30 24z" fill="#fff"/>${BOWL}`,
 
   // 면 요리
   noodle: `${STEAM}<path d="M18 52c0-15 12-24 30-24s30 9 30 24z" fill="#ffe9a8"/><g fill="none" stroke="#e0b44c" stroke-width="2.5" stroke-linecap="round"><path d="M24 46c5-4 9 4 14 0s9 4 14 0 9 4 14 0 6 2 8 0"/><path d="M26 38c6-4 10 4 16 0s10 4 16 0 6 2 8 0"/></g>${CHOPSTICKS}${BOWL}`,
