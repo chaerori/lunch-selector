@@ -1,5 +1,7 @@
-const STORAGE_KEY = "lunch-selector:restaurants";
 const PENCIL_ICON = '<svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20h4L19 9l-4-4L4 16z"/><path d="m13.5 6.5 4 4"/></svg>';
+const SAVE_ERROR = "저장하지 못했어요. 잠시 후 다시 시도해 주세요.";
+
+const { url: API_URL, key: API_KEY } = window.SUPABASE;
 
 const $ = (id) => document.getElementById(id);
 const hero = document.querySelector(".hero");
@@ -9,23 +11,39 @@ const resultLink = $("result-link");
 const pickBtn = $("pick");
 const sheet = $("sheet");
 
-let restaurants = load();
+let restaurants = [];
+let state = "loading"; // loading | ready | error
 let picked = false;
-let editingIndex = null;
+let editingId = null;
 const excluded = new Set();
 
-function load() {
-  try {
-    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
-    if (Array.isArray(saved)) {
-      return saved.map((r) => ({ ...r, categories: r.categories ?? [r.category] }));
-    }
-  } catch {}
-  return [];
+async function api(path = "", options = {}) {
+  const res = await fetch(`${API_URL}/rest/v1/restaurants${path}`, {
+    ...options,
+    headers: {
+      apikey: API_KEY,
+      "Content-Type": "application/json",
+      Prefer: "return=representation",
+    },
+  });
+  if (!res.ok) throw new Error(`${res.status}`);
+  return res.json();
 }
 
-function save() {
-  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(restaurants)); } catch {}
+function setStatus(text = "") {
+  $("status").textContent = text;
+  $("status").hidden = !text;
+}
+
+async function refresh() {
+  try {
+    restaurants = await api("?select=*&order=created_at.asc");
+    state = "ready";
+    setStatus();
+  } catch {
+    if (state !== "ready") state = "error";
+  }
+  render();
 }
 
 function isHttpUrl(value) {
@@ -60,18 +78,20 @@ function renderFilters() {
   $("category-options").replaceChildren(...cats.map((c) => new Option(c)));
 
   const n = candidates().length;
-  $("filter-hint").textContent = !restaurants.length
-    ? "식당을 추가하면 패스할 음식을 고를 수 있어요."
-    : excluded.size
-      ? `패스한 음식은 빼고 ${n}곳 중에서 골라요.`
-      : "오늘 당기지 않는 음식은 눌러서 빼 주세요.";
+  $("filter-hint").textContent = state !== "ready"
+    ? ""
+    : !restaurants.length
+      ? "식당을 추가하면 패스할 음식을 고를 수 있어요."
+      : excluded.size
+        ? `패스한 음식은 빼고 ${n}곳 중에서 골라요.`
+        : "오늘 당기지 않는 음식은 눌러서 빼 주세요.";
   pickBtn.disabled = n === 0;
 }
 
 function renderList() {
   $("count").textContent = restaurants.length ? restaurants.length : "";
-  $("empty").hidden = restaurants.length > 0;
-  $("list").replaceChildren(...restaurants.map((r, i) => {
+  $("empty").hidden = state !== "ready" || restaurants.length > 0;
+  $("list").replaceChildren(...restaurants.map((r) => {
     const li = document.createElement("li");
 
     const main = document.createElement("div");
@@ -101,7 +121,7 @@ function renderList() {
     edit.className = "icon-btn";
     edit.innerHTML = PENCIL_ICON;
     edit.setAttribute("aria-label", `${r.name} 수정`);
-    edit.onclick = () => openSheet(i);
+    edit.onclick = () => openSheet(r);
     li.append(edit);
 
     const del = document.createElement("button");
@@ -109,7 +129,18 @@ function renderList() {
     del.className = "icon-btn";
     del.textContent = "✕";
     del.setAttribute("aria-label", `${r.name} 삭제`);
-    del.onclick = () => { restaurants.splice(i, 1); save(); render(); };
+    del.onclick = async () => {
+      del.disabled = true;
+      try {
+        await api(`?id=eq.${r.id}`, { method: "DELETE" });
+        restaurants = restaurants.filter((x) => x.id !== r.id);
+        setStatus();
+        render();
+      } catch {
+        del.disabled = false;
+        setStatus(SAVE_ERROR);
+      }
+    };
     li.append(del);
     return li;
   }));
@@ -117,10 +148,18 @@ function renderList() {
 
 function renderIdle() {
   if (picked) return;
-  resultEl.textContent = restaurants.length ? "오늘은 여기 어때요?" : "아직 후보가 없어요";
-  metaEl.textContent = restaurants.length
-    ? "버튼을 누르면 한 곳을 골라 드려요."
-    : "자주 가는 식당을 추가하면 여기서 골라 드려요.";
+  if (state === "loading") {
+    resultEl.textContent = "목록을 불러오는 중이에요";
+    metaEl.textContent = "";
+  } else if (state === "error") {
+    resultEl.textContent = "목록을 불러오지 못했어요";
+    metaEl.textContent = "새로고침하거나 잠시 후 다시 열어 주세요.";
+  } else {
+    resultEl.textContent = restaurants.length ? "오늘은 여기 어때요?" : "아직 후보가 없어요";
+    metaEl.textContent = restaurants.length
+      ? "버튼을 누르면 한 곳을 골라 드려요."
+      : "자주 가는 식당을 추가하면 여기서 골라 드려요.";
+  }
 }
 
 function render() {
@@ -161,9 +200,8 @@ pickBtn.onclick = () => {
   }, 80);
 };
 
-function openSheet(index = null) {
-  editingIndex = index;
-  const r = restaurants[index];
+function openSheet(r = null) {
+  editingId = r?.id ?? null;
   $("sheet-title").textContent = r ? "식당 수정" : "새 식당 추가";
   $("submit-btn").textContent = r ? "저장" : "추가";
   if (r) {
@@ -177,18 +215,19 @@ function openSheet(index = null) {
 
 $("open-add").onclick = () => openSheet();
 sheet.addEventListener("close", () => {
-  editingIndex = null;
+  editingId = null;
   $("add-form").reset();
   for (const id of ["name", "category", "url"]) $(id).setCustomValidity("");
 });
 $("close-add").onclick = () => sheet.close();
 sheet.addEventListener("click", (e) => { if (e.target === sheet) sheet.close(); });
 
-$("add-form").onsubmit = (e) => {
+$("add-form").onsubmit = async (e) => {
   e.preventDefault();
   const name = $("name").value.trim();
   const categories = parseCategories($("category").value);
   const url = $("url").value.trim();
+  const id = editingId;
   if (!categories.length) {
     $("category").setCustomValidity("카테고리를 하나 이상 입력해 주세요.");
     $("category").reportValidity();
@@ -199,22 +238,41 @@ $("add-form").onsubmit = (e) => {
     $("url").reportValidity();
     return;
   }
-  if (restaurants.some((r, i) => i !== editingIndex && r.name === name && r.categories.join() === categories.join())) {
+  if (restaurants.some((r) => r.id !== id && r.name === name && r.categories.join() === categories.join())) {
     $("name").setCustomValidity("이미 있는 식당이에요.");
     $("name").reportValidity();
     return;
   }
-  const entry = { name, categories, url };
-  if (editingIndex === null) restaurants.push(entry);
-  else restaurants[editingIndex] = entry;
-  save();
-  e.target.reset();
-  sheet.close();
-  render();
+
+  const body = JSON.stringify({ name, categories, url });
+  $("submit-btn").disabled = true;
+  try {
+    if (id === null) {
+      const [row] = await api("", { method: "POST", body });
+      restaurants.push(row);
+    } else {
+      const [row] = await api(`?id=eq.${id}`, { method: "PATCH", body });
+      if (!row) throw new Error("missing");
+      restaurants = restaurants.map((r) => (r.id === id ? row : r));
+    }
+    setStatus();
+    sheet.close();
+    render();
+  } catch {
+    $("name").setCustomValidity(SAVE_ERROR);
+    $("name").reportValidity();
+  } finally {
+    $("submit-btn").disabled = false;
+  }
 };
 
 for (const id of ["name", "category", "url"]) {
   $(id).oninput = (e) => e.target.setCustomValidity("");
 }
 
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "visible") refresh();
+});
+
 render();
+refresh();
