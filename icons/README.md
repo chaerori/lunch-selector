@@ -8,7 +8,7 @@
 
 | 파일 | Fluent Emoji 이름 |
 |---|---|
-| rice.svg | bento-box |
+| rice.svg | pot-of-food (soup.svg와 같은 그림) |
 | noodle.svg | steaming-bowl |
 | soup.svg | pot-of-food |
 | sushi.svg | sushi |
@@ -23,4 +23,4 @@
 | katsu.svg | curry-rice |
 | pasta.svg | spaghetti |
 
-앱 아이콘(`favicon.svg`, `favicon-32.png`, `apple-touch-icon.png`)에는 같은 세트의 `bento-box`를 사용했습니다.
+앱 아이콘(`favicon.svg`, `favicon-32.png`, `apple-touch-icon.png`)에는 같은 세트의 `pot-of-food`를 사용했습니다.
