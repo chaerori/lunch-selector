@@ -8,7 +8,7 @@
 
 | 파일 | Fluent Emoji 이름 |
 |---|---|
-| rice.svg | pot-of-food (soup.svg와 같은 그림) |
+| rice.svg | spoon + fork-and-knife의 포크 (아래 추가 설명 참고) |
 | noodle.svg | steaming-bowl |
 | soup.svg | pot-of-food |
 | sushi.svg | sushi |
@@ -24,3 +24,5 @@
 | pasta.svg | spaghetti |
 
 앱 아이콘(`favicon.svg`, `favicon-32.png`, `apple-touch-icon.png`)에는 같은 세트의 `spoon`과 `fork-and-knife`의 포크 부분만 잘라 나란히 세워 사용했습니다. 호박색 배경 위에서 잘 보이도록 색을 크림색으로 바꾸고 회전·확대했습니다.
+
+`rice.svg`(기본 아이콘)는 앱 아이콘과 같은 그림으로, `spoon`과 `fork-and-knife`의 포크 부분만 잘라 크림색으로 바꾸고 회전·확대해 나란히 놓은 것입니다.
