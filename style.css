@@ -82,9 +82,9 @@ button { cursor: pointer; border: 0; }
   position: absolute;
   right: 18px;
   bottom: 14px;
-  font-size: 4.5rem;
-  line-height: 1;
-  filter: drop-shadow(0 8px 10px rgba(120, 70, 0, .25));
+  width: 84px;
+  height: 84px;
+  filter: drop-shadow(0 6px 8px rgba(120, 70, 0, .22));
   pointer-events: none;
 }
 .hero-link {
