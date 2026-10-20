@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>점심 메뉴 선택기</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <h1>오늘 점심 뭐 먹지?</h1>
+
+    <section class="result" aria-live="polite">
+      <div id="result">메뉴를 뽑아 보세요</div>
+    </section>
+    <button id="pick" type="button">메뉴 뽑기</button>
+
+    <section>
+      <h2>메뉴 목록 <span id="count"></span></h2>
+      <form id="add-form">
+        <input id="add-input" type="text" placeholder="메뉴 이름" maxlength="30" required>
+        <button type="submit">추가</button>
+      </form>
+      <ul id="list"></ul>
+      <button id="reset" type="button" class="link">기본 메뉴로 되돌리기</button>
+    </section>
+  </main>
+  <script src="app.js"></script>
+</body>
+</html>
