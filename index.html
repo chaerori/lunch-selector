@@ -61,7 +61,7 @@
   <dialog id="sheet">
     <form id="add-form" method="dialog">
       <div class="sheet-head">
-        <h2>새 식당 추가</h2>
+        <h2 id="sheet-title">새 식당 추가</h2>
         <button type="button" id="close-add" class="icon-btn" aria-label="닫기">✕</button>
       </div>
       <label>식당 이름
@@ -74,7 +74,7 @@
       <label>지도 링크 <span class="opt">선택</span>
         <input id="url" type="url" placeholder="https://" autocomplete="off">
       </label>
-      <button type="submit" class="primary">추가</button>
+      <button id="submit-btn" type="submit" class="primary">추가</button>
     </form>
   </dialog>
 

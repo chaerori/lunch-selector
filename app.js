@@ -10,6 +10,7 @@ const sheet = $("sheet");
 
 let restaurants = load();
 let picked = false;
+let editingIndex = null;
 const excluded = new Set();
 
 function load() {
@@ -72,8 +73,11 @@ function renderList() {
   $("list").replaceChildren(...restaurants.map((r, i) => {
     const li = document.createElement("li");
 
-    const main = document.createElement("div");
+    const main = document.createElement("button");
+    main.type = "button";
     main.className = "row-main";
+    main.setAttribute("aria-label", `${r.name} 수정`);
+    main.onclick = () => openSheet(i);
     const name = document.createElement("span");
     name.className = "row-name";
     name.textContent = r.name;
@@ -151,7 +155,26 @@ pickBtn.onclick = () => {
   }, 80);
 };
 
-$("open-add").onclick = () => { sheet.showModal(); $("name").focus(); };
+function openSheet(index = null) {
+  editingIndex = index;
+  const r = restaurants[index];
+  $("sheet-title").textContent = r ? "식당 수정" : "새 식당 추가";
+  $("submit-btn").textContent = r ? "저장" : "추가";
+  if (r) {
+    $("name").value = r.name;
+    $("category").value = r.categories.join(", ");
+    $("url").value = r.url;
+  }
+  sheet.showModal();
+  $("name").focus();
+}
+
+$("open-add").onclick = () => openSheet();
+sheet.addEventListener("close", () => {
+  editingIndex = null;
+  $("add-form").reset();
+  for (const id of ["name", "category", "url"]) $(id).setCustomValidity("");
+});
 $("close-add").onclick = () => sheet.close();
 sheet.addEventListener("click", (e) => { if (e.target === sheet) sheet.close(); });
 
@@ -170,12 +193,14 @@ $("add-form").onsubmit = (e) => {
     $("url").reportValidity();
     return;
   }
-  if (restaurants.some((r) => r.name === name && r.categories.join() === categories.join())) {
+  if (restaurants.some((r, i) => i !== editingIndex && r.name === name && r.categories.join() === categories.join())) {
     $("name").setCustomValidity("이미 있는 식당이에요.");
     $("name").reportValidity();
     return;
   }
-  restaurants.push({ name, categories, url });
+  const entry = { name, categories, url };
+  if (editingIndex === null) restaurants.push(entry);
+  else restaurants[editingIndex] = entry;
   save();
   e.target.reset();
   sheet.close();
