@@ -138,9 +138,9 @@ button { cursor: pointer; border: 0; }
 .list:empty { display: none; }
 .list li { display: flex; align-items: center; gap: 0.5rem; padding: 0.625rem 0; }
 .list li + li { border-top: 1px solid var(--line); }
-.row-main { flex: 1; min-width: 0; }
-.row-name { display: block; font-weight: 600; overflow-wrap: anywhere; }
-.row-tag { display: block; color: var(--muted); font-size: .82rem; }
+.row-main { flex: 1; min-width: 0; display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 0.5rem; }
+.row-name { font-weight: 600; overflow-wrap: anywhere; }
+.row-tag { color: var(--muted); font-size: .82rem; }
 .row-map {
   padding: 0.3125rem 0.75rem;
   border-radius: 62.4375rem;
