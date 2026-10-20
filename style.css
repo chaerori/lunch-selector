@@ -1,25 +1,33 @@
 :root {
-  --bg: #f1f2f1;
+  --bg: #f6f8fb;
   --surface: #fff;
-  --ink: #1c211f;
-  --muted: #68716d;
-  --line: #e2e5e3;
-  --hero: #ecdfa6;
-  --hero-ink: #1c211f;
-  --hero-muted: #6c5f2c;
-  --accent: #25403a;
-  --on-accent: #f2ead0;
+  --ink: #2a2d34;
+  --muted: #8a909c;
+  --line: #edf0f4;
+  --chip: #eef1f5;
+  --chip-ink: #4b5160;
+  --hero: linear-gradient(135deg, #ffc455, #fdb03c);
+  --hero-ink: #2e2208;
+  --hero-muted: #664806;
+  --accent: #f0800f;
+  --on-accent: #fff;
+  --tint: #fff1e0;
+  --tint-ink: #b85c00;
+  --shadow: 0 6px 24px rgba(40, 55, 90, .07);
   --danger: #e5484d;
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #101312;
-    --surface: #191d1b;
-    --ink: #eef0ee;
-    --muted: #8d9692;
-    --line: #272c2a;
-    --accent: #ecdfa6;
-    --on-accent: #1c211f;
+    --bg: #16171a;
+    --surface: #202226;
+    --ink: #f1f2f4;
+    --muted: #9399a5;
+    --line: #2a2d33;
+    --chip: #2a2d33;
+    --chip-ink: #c9ced8;
+    --tint: #3a2a17;
+    --tint-ink: #ffb766;
+    --shadow: none;
   }
 }
 
@@ -49,6 +57,8 @@ button { cursor: pointer; border: 0; }
 
 /* 결과 카드 */
 .hero {
+  position: relative;
+  overflow: hidden;
   background: var(--hero);
   color: var(--hero-ink);
   border-radius: 28px;
@@ -57,56 +67,83 @@ button { cursor: pointer; border: 0; }
   display: flex;
   flex-direction: column;
   justify-content: center;
+  box-shadow: 0 14px 30px -12px rgba(253, 160, 40, .6);
 }
 .hero-name {
+  padding-right: 72px;
   font-size: 2.25rem;
   font-weight: 800;
   line-height: 1.2;
   letter-spacing: -0.04em;
   word-break: keep-all;
 }
-.hero-meta { margin-top: 10px; color: var(--hero-muted); font-size: .95rem; }
+.hero-meta { margin-top: 10px; padding-right: 72px; color: var(--hero-muted); font-size: .95rem; font-weight: 500; }
+.hero-art {
+  position: absolute;
+  right: 18px;
+  bottom: 14px;
+  font-size: 4.5rem;
+  line-height: 1;
+  filter: drop-shadow(0 8px 10px rgba(120, 70, 0, .25));
+  pointer-events: none;
+}
 .hero-link {
   align-self: flex-start;
   margin-top: 20px;
   padding: 9px 16px;
   border-radius: 999px;
-  background: var(--hero-ink);
-  color: var(--hero);
+  background: rgba(255, 255, 255, .88);
+  color: #8a4a00;
   font-size: .9rem;
   font-weight: 700;
   text-decoration: none;
 }
-.hero.rolling .hero-name { color: var(--hero-muted); }
+.hero.rolling .hero-name { opacity: .55; }
 .hero.landed .hero-name { animation: pop .38s cubic-bezier(.2, 1.4, .4, 1); }
+.hero.landed .hero-art { animation: hop .5s cubic-bezier(.2, 1.4, .4, 1); }
 @keyframes pop { from { transform: scale(.88); opacity: .4; } to { transform: scale(1); opacity: 1; } }
+@keyframes hop { from { transform: translateY(14px) rotate(-8deg); } to { transform: none; } }
 
 /* 제외 칩 */
 .chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .chip {
   padding: 9px 16px;
+  border: 1.5px solid transparent;
   border-radius: 999px;
-  background: var(--surface);
-  color: var(--ink);
+  background: var(--chip);
+  color: var(--chip-ink);
   font-size: .92rem;
   font-weight: 600;
-  transition: background .15s, color .15s;
+  transition: background .15s, color .15s, border-color .15s;
 }
-.chip[aria-pressed="true"] { background: var(--ink); color: var(--bg); text-decoration: line-through; }
+.chip[aria-pressed="true"] {
+  background: var(--tint);
+  color: var(--tint-ink);
+  border-color: var(--accent);
+  text-decoration: line-through;
+}
 .hint { margin: 10px 0 0; color: var(--muted); font-size: .85rem; }
 
 /* 목록 */
 .text-btn { background: none; color: var(--muted); font-weight: 600; font-size: .92rem; padding: 6px 0; }
-.list { list-style: none; margin: 0; padding: 4px 16px; background: var(--surface); border-radius: 20px; }
+.list { list-style: none; margin: 0; padding: 4px 18px; background: var(--surface); border-radius: 24px; box-shadow: var(--shadow); }
 .list:empty { display: none; }
-.list li { display: flex; align-items: center; gap: 12px; padding: 14px 0; }
+.list li { display: flex; align-items: center; gap: 10px; padding: 14px 0; }
 .list li + li { border-top: 1px solid var(--line); }
 .row-main { flex: 1; min-width: 0; }
 .row-name { display: block; font-weight: 600; overflow-wrap: anywhere; }
 .row-tag { display: block; color: var(--muted); font-size: .82rem; }
-.row-map { color: var(--muted); font-size: .85rem; font-weight: 600; text-decoration: none; padding: 6px 4px; }
+.row-map {
+  padding: 5px 12px;
+  border-radius: 999px;
+  background: var(--tint);
+  color: var(--tint-ink);
+  font-size: .8rem;
+  font-weight: 700;
+  text-decoration: none;
+}
 .icon-btn { background: none; color: var(--muted); font-size: 1rem; width: 36px; height: 36px; border-radius: 50%; }
-.empty { margin: 0; padding: 28px 16px; text-align: center; color: var(--muted); background: var(--surface); border-radius: 20px; font-size: .92rem; }
+.empty { margin: 0; padding: 28px 16px; text-align: center; color: var(--muted); background: var(--surface); border-radius: 24px; box-shadow: var(--shadow); font-size: .92rem; }
 
 /* 하단 고정 버튼 */
 .dock {
@@ -122,16 +159,17 @@ button { cursor: pointer; border: 0; }
   max-width: 400px;
   margin: 0 auto;
   padding: 18px;
-  border-radius: 18px;
+  border-radius: 999px;
   background: var(--accent);
   color: var(--on-accent);
   font-size: 1.1rem;
   font-weight: 800;
+  box-shadow: 0 10px 22px -8px rgba(240, 128, 15, .7);
   pointer-events: auto;
   transition: transform .1s;
 }
 #pick:active:not(:disabled) { transform: scale(.98); }
-#pick:disabled { background: var(--line); color: var(--muted); cursor: default; }
+#pick:disabled { background: var(--chip); color: var(--muted); box-shadow: none; cursor: default; }
 
 /* 추가 바텀시트 */
 dialog {
@@ -145,7 +183,7 @@ dialog {
   color: var(--ink);
 }
 dialog[open] { animation: sheet .25s ease-out; }
-dialog::backdrop { background: rgba(10, 14, 18, .5); }
+dialog::backdrop { background: rgba(10, 14, 18, .45); }
 @keyframes sheet { from { transform: translateY(40px); opacity: 0; } to { transform: none; opacity: 1; } }
 .sheet-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
 #add-form label { display: block; margin-top: 16px; font-size: .85rem; font-weight: 600; color: var(--muted); }
@@ -156,7 +194,7 @@ input {
   margin-top: 6px;
   padding: 14px 16px;
   border: 1.5px solid transparent;
-  border-radius: 14px;
+  border-radius: 16px;
   background: var(--bg);
   font-size: 1rem;
   font-weight: 500;
@@ -167,7 +205,7 @@ input:invalid:not(:placeholder-shown):not(:focus) { border-color: var(--danger);
   width: 100%;
   margin-top: 24px;
   padding: 16px;
-  border-radius: 16px;
+  border-radius: 999px;
   background: var(--accent);
   color: var(--on-accent);
   font-weight: 800;
