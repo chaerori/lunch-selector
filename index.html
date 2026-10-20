@@ -12,18 +12,18 @@
 <body>
   <main>
     <header>
-      <h1>오늘 점심 어디 가지?</h1>
+      <h1>오늘 점심 뭐 먹지?</h1>
     </header>
 
     <section class="hero" aria-live="polite">
-      <div id="result" class="hero-name">식당을 추가해 주세요</div>
-      <div id="result-meta" class="hero-meta">추가한 식당 중에서 하나를 골라 드려요.</div>
+      <div id="result" class="hero-name"></div>
+      <div id="result-meta" class="hero-meta"></div>
       <a id="result-link" class="hero-link" hidden target="_blank" rel="noopener noreferrer">지도 열기</a>
     </section>
 
     <section>
       <div class="section-head">
-        <h2>오늘은 빼 주세요</h2>
+        <h2>오늘은 패스할 음식</h2>
       </div>
       <div id="filters" class="chips"></div>
       <p id="filter-hint" class="hint"></p>
@@ -35,31 +35,31 @@
         <button id="open-add" type="button" class="text-btn">식당 추가</button>
       </div>
       <ul id="list" class="list"></ul>
-      <p id="empty" class="empty" hidden>아직 식당이 없어요. 자주 가는 곳을 추가해 보세요.</p>
+      <p id="empty" class="empty" hidden>아직 식당이 없어요. 자주 가는 곳부터 추가해 보세요.</p>
     </section>
   </main>
 
   <div class="dock">
-    <button id="pick" type="button">식당 뽑기</button>
+    <button id="pick" type="button">점심 뽑기</button>
   </div>
 
   <dialog id="sheet">
     <form id="add-form" method="dialog">
       <div class="sheet-head">
-        <h2>식당 추가</h2>
+        <h2>새 식당 추가</h2>
         <button type="button" id="close-add" class="icon-btn" aria-label="닫기">✕</button>
       </div>
       <label>식당 이름
         <input id="name" type="text" maxlength="40" placeholder="예: 할매국밥" required autocomplete="off">
       </label>
       <label>카테고리
-        <input id="category" type="text" maxlength="20" list="category-options" placeholder="한식, 일식, 국밥" required autocomplete="off">
+        <input id="category" type="text" maxlength="20" list="category-options" placeholder="예: 한식, 일식, 국밥" required autocomplete="off">
         <datalist id="category-options"></datalist>
       </label>
-      <label>지도 주소 <span class="opt">선택</span>
+      <label>지도 링크 <span class="opt">선택</span>
         <input id="url" type="url" placeholder="https://" autocomplete="off">
       </label>
-      <button type="submit" class="primary">추가하기</button>
+      <button type="submit" class="primary">추가</button>
     </form>
   </dialog>
 

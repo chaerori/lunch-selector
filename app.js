@@ -9,6 +9,7 @@ const pickBtn = $("pick");
 const sheet = $("sheet");
 
 let restaurants = load();
+let picked = false;
 const excluded = new Set();
 
 function load() {
@@ -55,10 +56,10 @@ function renderFilters() {
 
   const n = candidates().length;
   $("filter-hint").textContent = !restaurants.length
-    ? "식당을 추가하면 빼고 싶은 음식을 고를 수 있어요."
+    ? "식당을 추가하면 패스할 음식을 고를 수 있어요."
     : excluded.size
-      ? `선택한 음식은 빼고 ${n}곳 중에서 뽑아요.`
-      : "먹고 싶지 않은 음식을 누르면 빠져요.";
+      ? `패스한 음식은 빼고 ${n}곳 중에서 골라요.`
+      : "오늘 당기지 않는 음식은 눌러서 빼 주세요.";
   pickBtn.disabled = n === 0;
 }
 
@@ -101,12 +102,23 @@ function renderList() {
   }));
 }
 
+function renderIdle() {
+  if (picked) return;
+  resultEl.textContent = restaurants.length ? "오늘은 여기 어때요?" : "아직 후보가 없어요";
+  metaEl.textContent = restaurants.length
+    ? "버튼을 누르면 한 곳을 골라 드려요."
+    : "자주 가는 식당을 추가하면 여기서 골라 드려요.";
+}
+
 function render() {
   renderFilters();
   renderList();
+  renderIdle();
 }
 
 function show(r) {
+  picked = true;
+  pickBtn.textContent = "다시 뽑기";
   resultEl.textContent = r.name;
   metaEl.textContent = r.category;
   resultLink.hidden = !r.url;
@@ -146,12 +158,12 @@ $("add-form").onsubmit = (e) => {
   const category = $("category").value.trim();
   const url = $("url").value.trim();
   if (url && !isHttpUrl(url)) {
-    $("url").setCustomValidity("http:// 또는 https:// 로 시작하는 주소를 입력해 주세요.");
+    $("url").setCustomValidity("http:// 또는 https://로 시작하는 지도 링크를 넣어 주세요.");
     $("url").reportValidity();
     return;
   }
   if (restaurants.some((r) => r.name === name && r.category === category)) {
-    $("name").setCustomValidity("이미 추가한 식당이에요.");
+    $("name").setCustomValidity("이미 있는 식당이에요.");
     $("name").reportValidity();
     return;
   }
