@@ -15,6 +15,7 @@ const sheet = $("sheet");
 let restaurants = [];
 let state = "loading"; // loading | ready | error
 let picked = false;
+let lastPickedId = null;
 let editingId = null;
 const excluded = new Set();
 
@@ -171,6 +172,7 @@ function render() {
 
 function show(r) {
   picked = true;
+  lastPickedId = r.id;
   art.innerHTML = iconFor(r.categories);
   pickBtn.textContent = "다시 뽑기";
   resultEl.textContent = r.name;
@@ -184,7 +186,9 @@ function show(r) {
 
 pickBtn.onclick = () => {
   const pool = candidates();
-  const winner = pool[Math.floor(Math.random() * pool.length)];
+  const fresh = pool.filter((r) => r.id !== lastPickedId);
+  const choices = fresh.length ? fresh : pool;
+  const winner = choices[Math.floor(Math.random() * choices.length)];
   pickBtn.disabled = true;
   resultLink.hidden = true;
   hero.classList.add("rolling");
