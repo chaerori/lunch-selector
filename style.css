@@ -217,6 +217,14 @@ input:invalid:not(:placeholder-shown):not(:focus) { border-color: var(--danger);
   font-weight: 800;
 }
 
+/* 넓은 화면: 글자와 폭을 키워 한눈에 보이게 */
+@media (min-width: 768px) {
+  html { font-size: 125%; }
+  main { max-width: 600px; padding-top: 64px; }
+  #pick { max-width: 560px; }
+  dialog { max-width: 600px; margin: auto; border-radius: 28px; padding-bottom: 24px; }
+}
+
 @media (prefers-reduced-motion: reduce) {
   *, ::before, ::after { animation: none !important; transition: none !important; }
 }
