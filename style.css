@@ -7,8 +7,8 @@
   --hero: #ffd84d;
   --hero-ink: #151a21;
   --hero-muted: #6b5a12;
-  --accent: #00c896;
-  --on-accent: #06251c;
+  --accent: #ff8a2b;
+  --on-accent: #2b1200;
   --danger: #e5484d;
 }
 @media (prefers-color-scheme: dark) {
