@@ -34,6 +34,9 @@ const ICONS = {
   // 카페·디저트
   coffee: `<g fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round" opacity=".9"><path d="M36 26c-5-5 5-8 0-14"/><path d="M50 24c-5-5 5-8 0-14"/></g><path d="M68 46h6c8 0 12 5 12 11s-4 11-12 11h-8" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/><path d="M18 38h50v24c0 14-10 24-25 24S18 76 18 62z" fill="#fff"/><ellipse cx="43" cy="38" rx="25" ry="6" fill="#7a3f0a"/><ellipse cx="43" cy="90" rx="34" ry="4" fill="#c8631a"/>`,
 
+  // 일식(일반): 주먹밥
+  onigiri: `<path d="M48 18Q54 18 58 26L86 74Q92 86 80 86H16Q4 86 10 74L38 26Q42 18 48 18Z" fill="#fff"/><path d="M17.5 62H78.5L86 74Q92 86 80 86H16Q4 86 10 74Z" fill="#2f3a33"/><circle cx="48" cy="44" r="5" fill="#d9482b"/><path d="M8 90h80" stroke="#7a3f0a" stroke-width="3" stroke-linecap="round"/>`,
+
   // 멕시칸
   taco: `<path d="M12 58Q17 40 26 48T40 41T54 37T68 42T83 47L84 58Z" fill="#6cb35d"/><circle cx="32" cy="50" r="4" fill="#d9482b"/><circle cx="52" cy="45" r="4" fill="#d9482b"/><circle cx="70" cy="50" r="4" fill="#d9482b"/><path d="M8 58h80c0 22-18 32-40 32S8 80 8 58z" fill="#f2c14e"/><path d="M8 58h80" stroke="#e0a82e" stroke-width="4" stroke-linecap="round"/><path d="M20 70c6 8 14 12 28 12" fill="none" stroke="#fff3c4" stroke-width="3" stroke-linecap="round"/>`,
 
@@ -46,7 +49,7 @@ const ICON_RULES = [
   ["noodle", ["면", "국수", "라멘", "라면", "우동", "냉면", "파스타", "짬뽕", "짜장", "소바", "아시안", "베트남", "태국", "팟타이"]],
   ["dumpling", ["만두", "딤섬", "중식", "중국", "마라", "탕수육"]],
   ["soup", ["국밥", "찌개", "탕", "전골", "해장", "국물", "순대국", "순댓국"]],
-  ["sushi", ["초밥", "스시", "회", "일식", "오마카세", "사시미"]],
+  ["sushi", ["초밥", "스시", "회", "오마카세", "사시미"]],
   ["pizza", ["피자", "이탈리"]],
   ["burger", ["버거", "패스트푸드"]],
   ["taco", ["멕시칸", "멕시코", "타코", "부리또"]],
@@ -55,6 +58,7 @@ const ICON_RULES = [
   ["coffee", ["카페", "커피", "디저트", "빵", "베이커리", "브런치"]],
   ["salad", ["샐러드", "비건", "샌드위치"]],
   ["pizza", ["양식"]],
+  ["onigiri", ["일식"]],
 ];
 
 function iconFor(categories) {
