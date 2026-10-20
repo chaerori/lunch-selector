@@ -173,7 +173,7 @@ function render() {
 function show(r) {
   picked = true;
   lastPickedId = r.id;
-  art.innerHTML = iconFor(r.categories);
+  art.src = iconFor(r.categories);
   pickBtn.textContent = "다시 뽑기";
   resultEl.textContent = r.name;
   metaEl.textContent = r.categories.join(", ");
@@ -197,7 +197,7 @@ pickBtn.onclick = () => {
     const r = pool[Math.floor(Math.random() * pool.length)];
     resultEl.textContent = r.name;
     metaEl.textContent = r.categories.join(", ");
-    art.innerHTML = iconFor(r.categories);
+    art.src = iconFor(r.categories);
     if (++ticks >= 12) {
       clearInterval(timer);
       hero.classList.remove("rolling");
@@ -281,6 +281,5 @@ document.addEventListener("visibilitychange", () => {
   if (document.visibilityState === "visible") refresh();
 });
 
-art.innerHTML = ICONS.rice;
 render();
 refresh();
