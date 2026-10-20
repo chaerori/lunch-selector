@@ -50,9 +50,16 @@ button {
 }
 #pick { width: 100%; margin-top: 12px; padding: 16px; font-size: 1.1rem; }
 button:disabled { opacity: .6; cursor: default; }
-button.link { background: none; color: var(--muted); text-decoration: underline; padding: 8px 0; font-weight: normal; }
 button.del { background: none; color: var(--muted); padding: 4px 8px; font-size: 1.1rem; }
-#add-form { display: flex; gap: 8px; }
+.result small { display: block; margin-top: 8px; font-size: .9rem; font-weight: normal; color: var(--muted); }
+.result a { display: inline-block; margin-top: 12px; color: var(--accent); font-size: 1rem; font-weight: 600; }
+.chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip { background: var(--card); color: var(--fg); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; font-weight: normal; }
+.chip[aria-pressed="true"] { background: var(--muted); color: var(--bg); border-color: var(--muted); text-decoration: line-through; }
+.hint { margin: 8px 0 0; font-size: .85rem; color: var(--muted); }
+#add-form { display: flex; flex-direction: column; gap: 8px; }
+.tag { margin-left: 8px; padding: 2px 8px; border-radius: 999px; background: var(--line); color: var(--muted); font-size: .8rem; }
+li a { color: var(--fg); }
 input {
   flex: 1;
   font: inherit;

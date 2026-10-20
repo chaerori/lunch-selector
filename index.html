@@ -3,26 +3,39 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>점심 메뉴 선택기</title>
+  <title>점심 식당 선택기</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <main>
-    <h1>오늘 점심 뭐 먹지?</h1>
+    <h1>오늘 점심 어디 갈까?</h1>
 
     <section class="result" aria-live="polite">
-      <div id="result">메뉴를 뽑아 보세요</div>
+      <div id="result">식당을 뽑아 보세요</div>
+      <a id="result-link" hidden target="_blank" rel="noopener noreferrer">지도에서 보기</a>
     </section>
-    <button id="pick" type="button">메뉴 뽑기</button>
 
     <section>
-      <h2>메뉴 목록 <span id="count"></span></h2>
+      <h2>오늘 먹고 싶지 않은 음식</h2>
+      <div id="filters" class="chips"></div>
+      <p id="filter-hint" class="hint"></p>
+    </section>
+    <button id="pick" type="button">식당 뽑기</button>
+
+    <section>
+      <h2>식당 추가</h2>
       <form id="add-form">
-        <input id="add-input" type="text" placeholder="메뉴 이름" maxlength="30" required>
+        <input id="name" type="text" placeholder="식당 이름" maxlength="40" required>
+        <input id="category" type="text" placeholder="카테고리 (예: 한식, 일식, 국밥)" maxlength="20" list="category-options" required>
+        <datalist id="category-options"></datalist>
+        <input id="url" type="url" placeholder="지도 URL (https://...)">
         <button type="submit">추가</button>
       </form>
+    </section>
+
+    <section>
+      <h2>식당 목록 <span id="count"></span></h2>
       <ul id="list"></ul>
-      <button id="reset" type="button" class="link">기본 메뉴로 되돌리기</button>
     </section>
   </main>
   <script src="app.js"></script>
