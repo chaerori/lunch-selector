@@ -6,10 +6,12 @@
     </linearGradient>
   </defs>
   <rect width="96" height="96" rx="22" fill="url(#g)"/>
-  <ellipse cx="34" cy="31" rx="11" ry="15" fill="#fff"/>
-  <rect x="31.5" y="42" width="5" height="38" rx="2.5" fill="#fff"/>
-  <g stroke="#7a3f0a" stroke-width="5" stroke-linecap="round">
-    <path d="M56 14L60 82"/>
-    <path d="M68 14L62 82"/>
+  <g transform="rotate(-35 48 48)" stroke="#7a3f0a" stroke-width="6" stroke-linecap="round">
+    <path d="M40 10V86"/>
+    <path d="M56 10V86"/>
+  </g>
+  <g transform="rotate(35 48 48)" fill="#fff" stroke="#d98a1f" stroke-width="3.6" paint-order="stroke">
+    <ellipse cx="48" cy="25" rx="13" ry="17"/>
+    <rect x="44.5" y="38" width="7" height="48" rx="3.5"/>
   </g>
 </svg>
