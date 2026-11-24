@@ -48,15 +48,6 @@ async function refresh() {
   render();
 }
 
-function isHttpUrl(value) {
-  try {
-    const { protocol } = new URL(value);
-    return protocol === "http:" || protocol === "https:";
-  } catch {
-    return false;
-  }
-}
-
 const parseCategories = (text) => [...new Set(text.split(/[,，]/).map((c) => c.trim()).filter(Boolean))];
 const categories = () => [...new Set(restaurants.flatMap((r) => r.categories))].sort();
 const candidates = () => restaurants.filter((r) => !r.categories.some((c) => excluded.has(c)));
@@ -214,7 +205,6 @@ function openSheet(r = null) {
   if (r) {
     $("name").value = r.name;
     $("category").value = r.categories.join(", ");
-    $("url").value = r.url;
   }
   sheet.showModal();
   $("name").focus();
@@ -224,7 +214,7 @@ $("open-add").onclick = () => openSheet();
 sheet.addEventListener("close", () => {
   editingId = null;
   $("add-form").reset();
-  for (const id of ["name", "category", "url"]) $(id).setCustomValidity("");
+  for (const id of ["name", "category"]) $(id).setCustomValidity("");
 });
 $("close-add").onclick = () => sheet.close();
 sheet.addEventListener("click", (e) => { if (e.target === sheet) sheet.close(); });
@@ -233,16 +223,10 @@ $("add-form").onsubmit = async (e) => {
   e.preventDefault();
   const name = $("name").value.trim();
   const categories = parseCategories($("category").value);
-  const url = $("url").value.trim();
   const id = editingId;
   if (!categories.length) {
     $("category").setCustomValidity("카테고리를 하나 이상 입력해 주세요.");
     $("category").reportValidity();
-    return;
-  }
-  if (url && !isHttpUrl(url)) {
-    $("url").setCustomValidity("http:// 또는 https://로 시작하는 지도 링크를 넣어 주세요.");
-    $("url").reportValidity();
     return;
   }
   if (restaurants.some((r) => r.id !== id && r.name === name && r.categories.join() === categories.join())) {
@@ -251,7 +235,7 @@ $("add-form").onsubmit = async (e) => {
     return;
   }
 
-  const body = JSON.stringify({ name, categories, url });
+  const body = JSON.stringify({ name, categories });
   $("submit-btn").disabled = true;
   try {
     if (id === null) {
@@ -273,7 +257,7 @@ $("add-form").onsubmit = async (e) => {
   }
 };
 
-for (const id of ["name", "category", "url"]) {
+for (const id of ["name", "category"]) {
   $(id).oninput = (e) => e.target.setCustomValidity("");
 }
 
